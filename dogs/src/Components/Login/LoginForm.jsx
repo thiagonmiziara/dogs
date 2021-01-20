@@ -9,6 +9,11 @@ const LoginForm = () => {
   const username = useForm();
   const password = useForm();
 
+  async function getUser(token){
+    const response = await fetch()
+
+  }
+
    async function handleSubmit(event) {
     event.preventDefault();
 
@@ -20,8 +25,8 @@ const LoginForm = () => {
 
       const response = await fetch(url,options);
       const json = await response.json();
-      console.log(json);
-
+      window.localStorage.setItem('token', json.token);
+      getUser(json.token)
     }
   };
 
