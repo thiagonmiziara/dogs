@@ -19,13 +19,15 @@ export const UserStorage = ({ children }) => {
           const { url, options } = TOKEN_VALIDATE_POST(token);
           const response = await fetch(url, options);
 
-          if (!response.ok) throw new Error("Token inválido");  
-          await getUser(token);
+          if (!response.ok) {
+            throw new Error("Token inválido");
+          }
 
+          await getUser(token);
         } catch (erro) {
-            userLogout();
+          userLogout();
         } finally {
-            setLoading(false);
+          setLoading(false);
         }
       }
     }
@@ -41,23 +43,37 @@ export const UserStorage = ({ children }) => {
   }
 
   async function userLogin(username, password) {
-    const { url, options } = TOKEN_POST({ username, password });
-    const tokenResponse = await fetch(url, options);
-    const { token } = await tokenResponse.json();
-    window.localStorage.setItem("token", token);
-    getUser(token);
+    try {
+      setError(null);
+      setLoading(true);
+      const { url, options } = TOKEN_POST({ username, password });
+      const tokenResponse = await fetch(url, options);
+
+      if (!tokenResponse.ok) throw new Error(`Error: Usuário inválido`);
+            
+      const { token } = await tokenResponse.json();
+      window.localStorage.setItem("token", token);
+      await getUser(token);
+    } catch (erro) {
+      setError(erro.message);
+      setLoading(false);
+    } finally {
+      setLoading(false);
+    }
   }
 
-  async function userLogout(){
-      setData(null);
-      setError(null);
-      setLoading(false);
-      setLogin(false);
-      window.localStorage.removeItem('token');
+  async function userLogout() {
+    setData(null);
+    setError(null);
+    setLoading(false);
+    setLogin(false);
+    window.localStorage.removeItem("token");
   }
- 
+
   return (
-    <UserContext.Provider value={{ userLogin,userLogout, data }}>
+    <UserContext.Provider
+      value={{ userLogin, userLogout, data, error, loading, login }}
+    >
       {children}
     </UserContext.Provider>
   );
