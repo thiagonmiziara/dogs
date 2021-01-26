@@ -1,11 +1,16 @@
-import React from 'react'
+import React from "react";
+import styles from "./FeedModal.module.css";
+import useFetch from "../../Hooks/useFetch";
 
-const FeedModal = () => {
-  return (
-    <div>
-      
-    </div>
-  )
-}
+const FeedModal = ({photo}) => {
+  const {data,error,loading,request} = useFetch();
 
-export default FeedModal
+  React.useEffect(()=>{
+    const{url,options} = PHOTO_GET();
+
+  },[]);
+
+  return <div className={styles.modal}></div>;
+};
+
+export default FeedModal;
