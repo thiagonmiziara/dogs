@@ -1,11 +1,14 @@
 import React from 'react'
+import Feed from '../Components/Feed/Feed';
 
 const Home = () => {
   return (
-    <div>
-      Home
-    </div>
-  )
+    <section className="container mainContainer">
+      <Feed/>
+    </section>
+      
+    
+  );
 }
 
 export default Home
