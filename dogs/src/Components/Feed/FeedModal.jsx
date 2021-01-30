@@ -15,8 +15,14 @@ const FeedModal = ({photo}) => {
 
   },[photo,request]);
 
+  function handleOutsidClick(event){
+    if(event.target === event.currentTarget){
+      
+    }
+  }
+
   return (
-  <div className={styles.modal}>
+  <div className={styles.modal} onClick={handleOutsidClick}>
     {error && <Error error={error}/>}
     {loading && <Loading/>}
     {data && <PhotoContent data={data}/> }
