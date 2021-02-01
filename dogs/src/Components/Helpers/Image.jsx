@@ -2,10 +2,19 @@ import React from "react";
 import styles from "./Image.module.css";
 
 const Image = ({ alt, ...props }) => {
+
+const [skeleton, setSkeleton] = React.useState(true);  
+
+function handleLoad({target}){
+  setSkeleton(false);
+  target.style.opacity = 1;
+
+}
+
   return (
     <div className={styles.wrapper}>
-      <div className={styles.skeleton}></div>
-      <img className={styles.img} src="" alt={alt} {...props} />
+     {skeleton && <div className={styles.skeleton}></div>}
+      <img onLoad={handleLoad} className={styles.img} src="" alt={alt} {...props} />
     </div>
   );
 };
