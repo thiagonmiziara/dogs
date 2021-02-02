@@ -2,7 +2,7 @@ import React from "react";
 
 const Head = (props) => {
   React.useEffect(() => {
-    document.title = props.title + "| Pets";
+    document.title = props.title + " | Pets";
     document
       .querySelector('meta[name="description"]')
       .setAttribute("content", props.description || "");
