@@ -26,9 +26,7 @@
 
 <!-- Status -->
 
-<!-- <h4 align="center"> 
-	🚧  Dogs 🚀 Em construção...  🚧
-</h4> 
+
 
 <hr> -->
 
